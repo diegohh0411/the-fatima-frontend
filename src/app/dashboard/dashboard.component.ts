@@ -44,9 +44,29 @@ export class DashboardComponent {
         }
       })
 
-      console.log(this.masses)
-    })
-    
+      // Sort masses by weekday
+      const orderedWeekdays = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO']
+      const actualWeekdays = Object.keys(this.masses)
+      actualWeekdays.sort((a: string, b: string) => {
+        return orderedWeekdays.indexOf(a) - orderedWeekdays.indexOf(b)
+      })
+      const orderedMasses: any = {}
+      actualWeekdays.forEach(weekday => {
+        orderedMasses[weekday] = this.masses[weekday]
+      })
+      this.masses = orderedMasses
+
+      // Sort masses arrays by hour
+      Object.values(this.masses).forEach((weekday: any) => {
+        weekday.sort((a: any, b: any) => {
+          // Parse strings to numbers for comparison
+          const hourA = parseInt(a.hour.split(':')[0]); 
+          const hourB = parseInt(b.hour.split(':')[0]);
+          
+          return hourA - hourB;
+        });
+      })
+    })    
   }
 
   ngOnInit() {
