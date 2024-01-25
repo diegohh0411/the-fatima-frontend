@@ -1,0 +1,21 @@
+<div class="w-full
+grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div *ngFor="let weekday of massesKeys"
+    class="dark:bg-gray-800
+    text-white
+    rounded
+    p-3
+    flex flex-col gap-3">
+        <p class="text-xl">{{weekday}}</p>
+
+        <div *ngFor="let mass of masses[weekday]"
+        class="flex flex-col gap-3">
+            <p class="">{{mass.hour}}</p>
+            <p *ngIf="mass.note"
+            class="p-2 dark:bg-gray-700 rounded">
+                {{mass.note}}
+            </p>
+        </div>
+    </div>
+
+</div>
