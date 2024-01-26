@@ -1,25 +1,29 @@
-<div class="w-full
-grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <div *ngFor="let weekday of massesKeys"
-    class="bg-gray-100 dark:bg-gray-800
-    hover:bg-gray-200 hover:dark:bg-gray-700
-    text-black dark:text-white
-    cursor-pointer
-    rounded
-    p-3
-    flex flex-col gap-3">
-        <p class="text-xl">{{weekday}}</p>
+<div
+class="w-full
+p-6
+rounded
+bg-gray-200 dark:bg-gray-800
+flex flex-col gap-6">
+    <p class="text-4xl text-black dark:text-white">
+        Misas
+    </p>
 
-        <div *ngFor="let mass of masses[weekday]"
-        class="flex flex-col gap-3">
-            <p class="">{{mass.hour}}</p>
-            <p *ngIf="mass.note"
-            class="p-2 
-            bg-gray-300 dark:bg-gray-600 
-            rounded">
-                {{mass.note}}
+    <div class="grid grid-cols-1 lg:grid-cols-7 gap-3">
+        <div *ngFor="let day of days"
+        class="flex flex-col gap-1">
+            <p class="text-black dark:text-white
+            text-2xl">
+                {{namesOfTheDays[day]}}
             </p>
+
+            <p *ngFor="let mass of getMassesOfTheDay(day)"
+            class="text-black dark:text-white text-sm">
+                {{mass.getUTCHours().toString().padStart(2, '0')}}:{{mass.getMinutes().toString().padStart(2, '0')}} 
+            </p>            
         </div>
     </div>
 
+    
+
+    
 </div>
